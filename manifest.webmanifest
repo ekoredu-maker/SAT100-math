@@ -1,7 +1,7 @@
 {
-  "name": "수능핏 수학",
+  "name": "수능핏 MATH",
   "short_name": "수능핏",
-  "description": "수능 수학 4점 문항 집중 학습",
+  "description": "D-31까지 14·15·21·22·28·30번 4점 기출 핵심을 정복하고, D-30부터 기출 변형으로 1등급을 준비하는 수능 수학 학습 앱",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
