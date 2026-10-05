@@ -1,23 +1,28 @@
-/* 수능핏 서비스워커 — v2.2 운영 패치 포함
+/* 수능핏 서비스워커 — v2.3 운영 패치 + 기출 계보 레이어
    학습 기록은 localStorage에 있으며 캐시 교체와 독립적으로 유지됩니다. */
-const CACHE = 'suneungfit-v2-2-0';
-const PATCH = './patch-v2.2.js';
+const CACHE = 'suneungfit-v2-3-0';
+const PATCHES = ['./patch-v2.2.js','./lineage-v2.3.js'];
 const STATIC_ASSETS = [
-  './manifest.webmanifest', PATCH,
+  './manifest.webmanifest', ...PATCHES,
   './icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png'
 ];
 
-function injectPatch(html){
-  if (html.includes('patch-v2.2.js')) return html;
-  const tag = '<script src="./patch-v2.2.js"></script>';
-  return html.includes('</body>') ? html.replace('</body>', tag + '</body>') : html + tag;
+function injectPatches(html){
+  let out = html;
+  for (const src of PATCHES) {
+    const file = src.replace('./','');
+    if (out.includes(file)) continue;
+    const tag = `<script src="${src}"></script>`;
+    out = out.includes('</body>') ? out.replace('</body>', tag + '</body>') : out + tag;
+  }
+  return out;
 }
 
 function htmlResponse(text, sourceHeaders){
   const headers = new Headers(sourceHeaders || {});
   headers.set('content-type','text/html; charset=utf-8');
   headers.delete('content-length');
-  return new Response(injectPatch(text), {status:200, headers});
+  return new Response(injectPatches(text), {status:200, headers});
 }
 
 async function fetchPatchedIndex(){
@@ -48,7 +53,7 @@ self.addEventListener('activate', e => {
   })());
 });
 
-/* 문서는 네트워크 우선 + v2.2 패치 주입, 실패 시 패치된 캐시.
+/* 문서는 네트워크 우선 + v2.2/v2.3 패치 주입, 실패 시 패치된 캐시.
    나머지 자산은 캐시 우선. */
 self.addEventListener('fetch', e => {
   const req = e.request;
