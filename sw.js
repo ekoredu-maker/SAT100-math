@@ -1,6 +1,6 @@
-/* 수능핏 서비스워커 — v2.5 운영 패치 + 기출 계보 + Apple Pencil 저지연 + 사고 관통 피드백
+/* 수능핏 서비스워커 — v2.5.1 운영 패치 + 기출 계보 + Apple Pencil 저지연 + 사고-행동 연결 피드백
    학습 기록은 localStorage에 있으며 캐시 교체와 독립적으로 유지됩니다. */
-const CACHE = 'suneungfit-v2-5-0';
+const CACHE = 'suneungfit-v2-5-1';
 const PATCHES = ['./patch-v2.2.js','./lineage-v2.3.js','./pen-v2.4.js','./feedback-v2.5.js'];
 const STATIC_ASSETS = [
   './manifest.webmanifest', ...PATCHES,
