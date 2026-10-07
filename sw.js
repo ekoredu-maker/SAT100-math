@@ -1,7 +1,7 @@
-/* 수능핏 서비스워커 — v2.6 운영 패치 + 기출 계보 + 사고-행동 연결 + 시험용 Apple Pencil 엔진
+/* 수능핏 서비스워커 — v2.7 운영 패치 + 기출 계보 + 사고연결 + 시험용 필기 + 대학별 수리논술
    학습 기록은 localStorage에 있으며 캐시 교체와 독립적으로 유지됩니다. */
-const CACHE = 'suneungfit-v2-6-0';
-const PATCHES = ['./patch-v2.2.js','./lineage-v2.3.js','./feedback-v2.5.js','./pen-v2.6.js'];
+const CACHE = 'suneungfit-v2-7-0';
+const PATCHES = ['./patch-v2.2.js','./lineage-v2.3.js','./feedback-v2.5.js','./pen-v2.6.js','./essay-v2.7.js'];
 const STATIC_ASSETS = [
   './manifest.webmanifest', ...PATCHES,
   './icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png'
@@ -53,7 +53,7 @@ self.addEventListener('activate', e => {
   })());
 });
 
-/* 문서는 네트워크 우선 + v2.2/v2.3/v2.5/v2.6 패치 주입, 실패 시 패치된 캐시.
+/* 문서는 네트워크 우선 + v2.2/v2.3/v2.5/v2.6/v2.7 패치 주입, 실패 시 패치된 캐시.
    나머지 자산은 캐시 우선. */
 self.addEventListener('fetch', e => {
   const req = e.request;
