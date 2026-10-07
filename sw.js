@@ -1,6 +1,6 @@
 /* 수능핏 서비스워커 — v2.7 운영 패치 + 기출 계보 + 사고연결 + 시험용 필기 + 대학별 수리논술
    학습 기록은 localStorage에 있으며 캐시 교체와 독립적으로 유지됩니다. */
-const CACHE = 'suneungfit-v2-7-0';
+const CACHE = 'suneungfit-v2-7-1';
 const PATCHES = ['./patch-v2.2.js','./lineage-v2.3.js','./feedback-v2.5.js','./pen-v2.6.js','./essay-v2.7.js'];
 const STATIC_ASSETS = [
   './manifest.webmanifest', ...PATCHES,
