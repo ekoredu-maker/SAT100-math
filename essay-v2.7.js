@@ -80,7 +80,7 @@ try{
 }catch(_){}
 try{
   var v=document.querySelector('.version');
-  if(v){var count=Array.isArray(window.QUESTION_BANK)?window.QUESTION_BANK.length:104;v.textContent='v2.7 '+count+'문항';}
+  if(v){var count=Array.isArray(window.QUESTION_BANK)?window.QUESTION_BANK.length:110;v.textContent='v2.7 '+count+'문항';document.title='수능핏 MATH v2.7 '+count+'문항 · 기출핵심+대학별논술';document.querySelectorAll('.quality-note').forEach(function(el){if(el.textContent.indexOf('문제 구성')>=0){el.innerHTML='<b>문제 구성</b><br>현재 '+count+'문항. 14·15·21·22·28·30에는 구조 은폐형 상위 문항을 추가했고, D-30부터는 기출 변형 중심으로 운영합니다.';}});}
 }catch(_){}
 try{renderEssayV27();}catch(_){}
 })();
