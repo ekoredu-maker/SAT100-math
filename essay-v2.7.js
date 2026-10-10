@@ -70,12 +70,12 @@ var h=document.querySelector('#kuView h2');if(h)h.textContent='대학별 수리�
 var e=document.querySelector('#kuView .eyebrow');if(e)e.textContent='최근 기출을 복제하지 않고 출제 구조를 재구성';
 try{
   var k=dayKey(),d=state.daily&&state.daily[k];
-  var drafts=Object.values((d&&d.drafts)||{});
-  var hasWork=!!(d&&d.gradedAt)||((d&&d.marked)||[]).length>0||drafts.some(function(x){return x&&(x.answer||x.confidence||x.hintUsed);});
   if(state.difficultyV27!=='challenge-plus-8'){
     state.difficultyV27='challenge-plus-8';
-    if(d&&!hasWork)delete state.daily[k];
-    save();makeQueue(true);
+    save();
+    /* 이미 만들어진 오늘 묶음은 절대 교체하지 않는다.
+       난도 변경은 다음 새 묶음부터 반영한다. */
+    if(!d)makeQueue(true);
   }
 }catch(_){}
 try{
