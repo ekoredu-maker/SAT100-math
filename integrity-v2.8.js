@@ -97,7 +97,7 @@
       state.daily[lock.key] = d;
       /* 미채점 묶음은 자정을 넘어도 그대로 유지.
          채점 완료 묶음은 같은 날에는 결과 열람용으로 유지하고, 다음 날 새 묶음으로 넘어간다. */
-      if (!d.gradedAt || lock.key === today) return lock.key;
+      if (!d.gradedAt || lock.key === today || window.__SAT100_HOLD_BUNDLE_KEY__ === lock.key) return lock.key;
       delete state.bundleLockV28;
       try { save(); } catch (_) {}
     }
@@ -172,6 +172,7 @@
         try { renderStudy(); } catch (_) {}
         return;
       }
+      window.__SAT100_HOLD_BUNDLE_KEY__ = resolveBundleKey();
       return rawGradeBundle();
     };
   } catch (_) {}
@@ -210,7 +211,7 @@
           drawnUpTo = 0;
         }
       } catch (_) {}
-      if (prevId && prevData && prevId !== qid) {
+      if (prevId && prevData) {
         try { await scratchPut(prevId,prevData); } catch (_) {}
       }
 
